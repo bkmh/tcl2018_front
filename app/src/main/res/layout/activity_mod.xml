@@ -54,7 +54,7 @@
             android:id="@+id/inqButton"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:text="@string/btnInq" />
+            android:text="@string/inqButton" />
     </LinearLayout>
 
     <TextView

@@ -17,7 +17,7 @@ public class ModActivity extends Activity {
 
         Intent intent = null;
         switch (v.getId()) {
-            case R.id.returnButton:
+            case R.id.backButton:
                 intent = new Intent(this, MainActivity.class);
                 break;
         }
