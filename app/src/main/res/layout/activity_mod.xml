@@ -40,7 +40,7 @@
         android:layout_height="100dp">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/inputKey"
             android:layout_width="240dp"
             android:layout_height="45dp"
             android:autofillHints=""
@@ -54,6 +54,7 @@
             android:id="@+id/inqButton"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
+            android:onClick="mOnClick"
             android:text="@string/inqButton" />
     </LinearLayout>
 
@@ -65,14 +66,14 @@
         android:text="이전 값" />
 
     <TextView
-        android:id="@+id/editText5"
+        android:id="@+id/valueTextView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:baselineAligned="false"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textAlignment="center"
         android:text="010-1234-5678"
+        android:textAlignment="center"
         android:textSize="30sp" />
 
     <TextView
@@ -88,7 +89,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/modVal"
             android:layout_width="240dp"
             android:layout_height="45dp"
             android:ems="10"
@@ -99,6 +100,7 @@
             android:id="@+id/modButton"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
+            android:onClick="mOnClick"
             android:text="수정" />
     </LinearLayout>
 
