@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:onClick="mOnClick"
-        android:text="등록"
+        android:text="@string/regButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="mOnClick"
-        android:text="조회"
+        android:text="@string/inqButton"
         app:layout_constraintStart_toStartOf="@+id/regButton"
         app:layout_constraintTop_toBottomOf="@+id/regButton" />
 
@@ -49,7 +49,7 @@
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:onClick="mOnClick"
-        android:text="변경"
+        android:text="@string/modButton"
         app:layout_constraintStart_toStartOf="@+id/inqButton"
         app:layout_constraintTop_toBottomOf="@+id/inqButton" />
 
