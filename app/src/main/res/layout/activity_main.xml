@@ -53,4 +53,14 @@
         app:layout_constraintStart_toStartOf="@+id/inqButton"
         app:layout_constraintTop_toBottomOf="@+id/inqButton" />
 
+    <Button
+        android:id="@+id/tempButton"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:onClick="mOnClick"
+        android:text="@string/tempButton"
+        app:layout_constraintStart_toStartOf="@+id/modButton"
+        app:layout_constraintTop_toBottomOf="@+id/modButton" />
+
 </android.support.constraint.ConstraintLayout>
