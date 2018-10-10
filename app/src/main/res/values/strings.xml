@@ -3,5 +3,7 @@
     <string name="regButton">등록</string>
     <string name="inqButton">조회</string>
     <string name="modButton">변경</string>
+    <string name="title">수정 / 삭제</string>
+    <string name="EnterKey">키 입력</string>
     <string name="tempButton">임시</string>
 </resources>

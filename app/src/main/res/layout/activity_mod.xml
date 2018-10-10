@@ -1,27 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ModActivity">
+    android:orientation="vertical"
+    android:background="#fff"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:text="@string/title"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="mOnClick"
+            android:text="이전" />
+    </LinearLayout>
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ModActivity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="17dp"
+        android:text="@string/EnterKey" />
 
-    <Button
-        android:id="@+id/returnButton"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <EditText
+            android:id="@+id/inputKey"
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:inputType="text|textCapCharacters|textCapWords|textPersonName"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:text="" />
+
+        <Button
+            android:id="@+id/inqButton"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:onClick="mOnClick"
+            android:text="@string/inqButton" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="returnButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="131dp" />
+        android:textSize="17dp"
+        android:text="이전 값" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/valueTextView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:baselineAligned="false"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="010-1234-5678"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:text="수정 값" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/modVal"
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <Button
+            android:id="@+id/modButton"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:onClick="mOnClick"
+            android:text="수정" />
+    </LinearLayout>
+
+</LinearLayout>
