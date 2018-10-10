@@ -26,6 +26,9 @@ public class MainActivity extends Activity {
             case R.id.modButton:
                 intent = new Intent(this, ModActivity.class);
                 break;
+            case R.id.tempButton:
+                intent = new Intent(this, TempActivity.class);
+                break;
         }
         if(intent != null) {
             startActivity(intent);

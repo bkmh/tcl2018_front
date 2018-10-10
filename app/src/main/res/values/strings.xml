@@ -3,4 +3,5 @@
     <string name="regButton">등록</string>
     <string name="inqButton">조회</string>
     <string name="modButton">변경</string>
+    <string name="tempButton">임시</string>
 </resources>
