@@ -22,15 +22,18 @@ public class TempActivity extends Activity {
 
     private static final String TAG = "imagesearchexample";
     public static final int LOAD_SUCCESS = 101;
-
-    private String SEARCH_URL = "https://secure.flickr.com/services/rest/?method=flickr.photos.search";
+    // IP = 개인 PC IP를 입력(docker-machine IP 아님)
+    // ex) 172.30.10.41 를 변경하세요
+    private String SEARCH_URL = "http://172.30.10.41:3500/api/v1/balance/a";
     private String API_KEY = "&api_key=b901381d5d56065a36032436ff20243a";
     private String PER_PAGE = "&per_page=50";
     private String SORT = "&sort=interestingness-desc";
     private String FORMAT = "&format=json";
     private String CONTECT_TYPE = "&content_type=1";
     private String SEARCH_TEXT = "&text='cat'";
-    private String REQUEST_URL = SEARCH_URL + API_KEY + PER_PAGE + SORT + FORMAT + CONTECT_TYPE + SEARCH_TEXT;
+    //private String REQUEST_URL = SEARCH_URL + API_KEY + PER_PAGE + SORT + FORMAT + CONTECT_TYPE + SEARCH_TEXT;
+    // 차후 해당 부분에 대해 REQUEST_URL을 조정해야 함.
+    private String REQUEST_URL = SEARCH_URL;
 
     private ProgressDialog progressDialog;
     private TextView textviewJSONText;
@@ -109,7 +112,7 @@ public class TempActivity extends Activity {
 
                     httpURLConnection.setReadTimeout(3000);
                     httpURLConnection.setConnectTimeout(15000);
-                    httpURLConnection.setDoOutput(true);
+//                    httpURLConnection.setDoOutput(true);
                     httpURLConnection.setDoInput(true);
                     httpURLConnection.setRequestMethod("GET");
                     httpURLConnection.setUseCaches(false);
