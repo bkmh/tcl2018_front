@@ -6,4 +6,22 @@
     <string name="title">수정 / 삭제</string>
     <string name="EnterKey">키 입력</string>
     <string name="tempButton">임시</string>
+    <string name="termsTitle">이용약관</string>
+    <string name="terms1Titme">약관1</string>
+    <string name="terms1Body">
+        이용약관 첫번째 내용입니다.\n
+        가나다라마바사아자차카타파하1\n
+        가나다라마바사아자차카타파하2\n
+        가나다라마바사아자차카타파하3\n
+        가나다라마바사아자차카타파하4\n
+        가나다라마바사아자차카타파하5\n
+        가나다라마바사아자차카타파하6\n
+        가나다라마바사아자차카타파하7\n
+        가나다라마바사아자차카타파하8\n
+        가나다라마바사아자차카타파하9\n
+        가나다라마바사아자차카타파하0\n
+        가나다라마바사아자차카타파하1\n
+        가나다라마바사아자차카타파하2
+    </string>
+    <string name="agreeNgo">동의 및 진행</string>
 </resources>
