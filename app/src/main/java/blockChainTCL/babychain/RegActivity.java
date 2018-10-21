@@ -6,7 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import blockChainTCL.babychain.RestApi.RestAPITask;
+import blockChainTCL.babychain.Utils.Constant;
 
 public class RegActivity extends Activity {
 
@@ -33,8 +37,21 @@ public class RegActivity extends Activity {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 // 확인시 처리 로직
-                                Toast.makeText(RegActivity.this, "등록을 완료했습니다.", Toast.LENGTH_SHORT).show();
-                                finish();
+                                EditText keyEdit = (EditText)findViewById(R.id.editText);
+                                String key = keyEdit.getText().toString();
+
+                                EditText valueEdit = (EditText)findViewById(R.id.editText2);
+                                String value = valueEdit.getText().toString();
+
+                                if(!key.isEmpty() && !value.isEmpty()) {
+                                    RestAPITask restAPITask = new RestAPITask();
+                                    restAPITask.execute(Constant.RESISTER, key, value);
+
+                                    Toast.makeText(RegActivity.this, "[" + key + ":" + value + "]등록을 완료했습니다.", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                } else {
+                                    Toast.makeText(RegActivity.this, "값을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                                }
                             }})
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {

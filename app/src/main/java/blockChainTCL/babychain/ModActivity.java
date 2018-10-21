@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.util.concurrent.ExecutionException;
+import android.widget.Toast;
 
 import blockChainTCL.babychain.RestApi.RestAPITask;
+import blockChainTCL.babychain.Utils.Constant;
 
 public class ModActivity extends Activity {
+
+    private String key = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class ModActivity extends Activity {
         Intent intent = null;
         TextView showVal = (TextView)findViewById(R.id.valueTextView);
         EditText updateVal = (EditText)findViewById(R.id.modVal);
+        String result;
 
         switch (v.getId()) {
             case R.id.backButton:
@@ -31,22 +34,45 @@ public class ModActivity extends Activity {
                 break;
 
             case R.id.inqButton:
-                showVal.setText("010-3456-7890");
 
-                //2018.10.14 추가
-                RestAPITask t = new RestAPITask(getApplicationContext());
-                try{
-                    String val = t.execute().get();
-                    showVal.setText(val);
-                }catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
+                try {
+                    EditText keyEdit = (EditText)findViewById(R.id.inputKey);
+                    key = keyEdit.getText().toString();
+
+                    if(!key.isEmpty()) {
+                        RestAPITask restAPITask = new RestAPITask();
+                        result = restAPITask.execute(Constant.READ, key).get();
+
+                        if("".equals(result)) {
+                            result = "해당 Key는 존재하지 않습니다.";
+                            key = null;
+                        }
+                    } else {
+                        result = "값을 입력해주세요.";
+                        key = null;
+                    }
+                } catch (Exception e) {
+                    result = "조회 실패했습니다. \n" + e.getStackTrace();
+                    key = null;
                 }
+
+                showVal.setText(result);
+
                 break;
 
             case R.id.modButton:
-                showVal.setText(updateVal.getText());
+                String value = updateVal.getText().toString();
+
+                if(key != null && !key.isEmpty() && !value.isEmpty()) {
+                    RestAPITask restAPITask = new RestAPITask();
+                    restAPITask.execute(Constant.MODIFY, key, value);
+
+                    Toast.makeText(ModActivity.this, "[" + key + ":" + value + "]수정을 완료했습니다.", Toast.LENGTH_SHORT).show();
+//                    showVal.setText(value);
+                } else {
+                    Toast.makeText(ModActivity.this, "값을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
         }
     }
