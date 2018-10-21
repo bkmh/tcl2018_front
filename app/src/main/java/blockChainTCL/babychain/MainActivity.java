@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
 import java.io.IOException;
+
+import blockChainTCL.babychain.Utils.BackPressCloseHandler;
+import blockChainTCL.babychain.Utils.Cache;
 
 public class MainActivity extends Activity {
 

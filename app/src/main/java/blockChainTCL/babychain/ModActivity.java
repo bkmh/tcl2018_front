@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
 
-import static blockChainTCL.babychain.R.id.modVal;
+import blockChainTCL.babychain.RestApi.RestAPITask;
 
 public class ModActivity extends Activity {
 
@@ -34,7 +34,7 @@ public class ModActivity extends Activity {
                 showVal.setText("010-3456-7890");
 
                 //2018.10.14 추가
-                RestAPITask t = new RestAPITask();
+                RestAPITask t = new RestAPITask(getApplicationContext());
                 try{
                     String val = t.execute().get();
                     showVal.setText(val);
