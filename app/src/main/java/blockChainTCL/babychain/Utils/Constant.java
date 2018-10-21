@@ -4,9 +4,9 @@ public class Constant {
 
     public static final String BACKEND_URL = "http://10.0.2.2:3500/api/v1/babychain/";
 
-    public static final int RESISTER = 0;
-    public static final int READ = 1;
-    public static final int MODIFY = 2;
-    public static final int DELETE = 3;
-    public static final int UPLOAD = 4;
+    public static final String RESISTER = "register";
+    public static final String READ = "read";
+    public static final String MODIFY = "modify";
+    public static final String DELETE = "delete";
+    public static final String UPLOAD = "uploadtest";
 }

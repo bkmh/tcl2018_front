@@ -2,7 +2,6 @@ package blockChainTCL.babychain.RestApi;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,20 +23,23 @@ public class RestAPITask extends AsyncTask<String, String, String> {
     protected String doInBackground(String... strings) {
 
         String result;
+        JSONArray jsonArray;
+        JSONObject jsonObject;
 
         try {
             String method = strings[0]; // 0 : register, read, modify, delete, upload
             RestApi restApi = new RestApi();
 
-            switch(Integer.parseInt(method)) {
+            switch(method) {
                 case RESISTER :
-                    result = restApi.POST(BACKEND_URL, "key", strings[1], "value", strings[2]);
+                    result = restApi.POST(BACKEND_URL + "register", "key", strings[1], "value", strings[2]);
+
                     break;
                 case READ :
                     result = restApi.GET(BACKEND_URL + strings[1]);
 
-                    JSONArray jsonArray = new JSONArray(result);
-                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    jsonArray = new JSONArray(result);
+                    jsonObject = jsonArray.getJSONObject(0);
                     result = jsonObject.getString("parsed");
 
                     break;

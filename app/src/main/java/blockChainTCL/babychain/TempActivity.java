@@ -28,10 +28,11 @@ public class TempActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                RestAPITask restAPITask = new RestAPITask(getApplicationContext());
+                RestAPITask restAPITask = new RestAPITask();
                 String result = null;
                 try {
-                    result = restAPITask.execute(String.valueOf(Constant.READ), "keyAAA").get();
+                    result = restAPITask.execute(Constant.READ, "keyBBB").get();
+                    //result = restAPITask.execute(Constant.RESISTER, "keyBBB", "valueBBB").get();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
