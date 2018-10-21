@@ -20,25 +20,71 @@ public class TempActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temp);
 
-        Button buttonRequestJSON = (Button)findViewById(R.id.button_main_requestjson);
-        TextView textviewJSONText = (TextView)findViewById(R.id.textview_main_jsontext);
-        textviewJSONText.setMovementMethod(new ScrollingMovementMethod());
-
-        buttonRequestJSON.setOnClickListener(new View.OnClickListener() {
+        // 등록버튼
+        ((Button) findViewById(R.id.button_temp_register)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                RestAPITask restAPITask = new RestAPITask();
-                String result = null;
                 try {
-                    result = restAPITask.execute(Constant.READ, "keyBBB").get();
-                    //result = restAPITask.execute(Constant.RESISTER, "keyBBB", "valueBBB").get();
+                    RestAPITask restAPITask = new RestAPITask();
+                    String result = restAPITask.execute(Constant.RESISTER, "keyBBB", "valueBBB").get();
+
+                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        // 조회버튼
+        ((Button) findViewById(R.id.button_temp_read)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    RestAPITask restAPITask = new RestAPITask();
+                    String result = restAPITask.execute(Constant.READ, "keyBBB").get();
+
+                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // 수정버튼
+        ((Button) findViewById(R.id.button_temp_modify)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    RestAPITask restAPITask = new RestAPITask();
+                    String result = restAPITask.execute(Constant.MODIFY, "keyBBB", "valueBBBmodifed").get();
+
+                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // 삭제버튼
+        ((Button) findViewById(R.id.button_temp_delete)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    RestAPITask restAPITask = new RestAPITask();
+                    String result = restAPITask.execute(Constant.DELETE, "keyBBB").get();
+
+                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

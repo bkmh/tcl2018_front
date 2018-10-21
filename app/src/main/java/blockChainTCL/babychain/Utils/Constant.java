@@ -9,4 +9,7 @@ public class Constant {
     public static final String MODIFY = "modify";
     public static final String DELETE = "delete";
     public static final String UPLOAD = "uploadtest";
+
+    public static final int READ_TIMEOUT = 1000;
+    public static final int CONNECT_TIMEOUT = 5000;
 }

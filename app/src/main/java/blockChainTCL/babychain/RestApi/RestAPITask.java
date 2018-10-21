@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import static blockChainTCL.babychain.Utils.Constant.BACKEND_URL;
+import static blockChainTCL.babychain.Utils.Constant.DELETE;
+import static blockChainTCL.babychain.Utils.Constant.MODIFY;
 import static blockChainTCL.babychain.Utils.Constant.READ;
 import static blockChainTCL.babychain.Utils.Constant.RESISTER;
 
@@ -32,7 +34,7 @@ public class RestAPITask extends AsyncTask<String, String, String> {
 
             switch(method) {
                 case RESISTER :
-                    result = restApi.POST(BACKEND_URL + "register", "key", strings[1], "value", strings[2]);
+                    result = restApi.POST(BACKEND_URL + RESISTER, "key", strings[1], "value", strings[2]);
 
                     break;
                 case READ :
@@ -41,6 +43,14 @@ public class RestAPITask extends AsyncTask<String, String, String> {
                     jsonArray = new JSONArray(result);
                     jsonObject = jsonArray.getJSONObject(0);
                     result = jsonObject.getString("parsed");
+
+                    break;
+                case MODIFY :
+                    result = restApi.POST(BACKEND_URL + MODIFY, "key", strings[1], "value", strings[2]);
+
+                    break;
+                case DELETE :
+                    result = restApi.GET(BACKEND_URL + DELETE + "/" + strings[1]);
 
                     break;
                 default :

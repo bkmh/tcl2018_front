@@ -15,6 +15,10 @@ import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.Properties;
 
+import static blockChainTCL.babychain.Utils.Constant.CONNECT_TIMEOUT;
+import static blockChainTCL.babychain.Utils.Constant.READ_TIMEOUT;
+
+
 public class RestApi {
 
     public String GET(String requestUrl, String... strings) {
@@ -37,8 +41,8 @@ public class RestApi {
             URL url = new URL(encodedUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
-            httpURLConnection.setReadTimeout(10000);
-            httpURLConnection.setConnectTimeout(15000);
+            httpURLConnection.setReadTimeout(READ_TIMEOUT);
+            httpURLConnection.setConnectTimeout(CONNECT_TIMEOUT);
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.setUseCaches(false);
             httpURLConnection.connect();
@@ -102,8 +106,8 @@ public class RestApi {
             URL url = new URL(requestUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
-            httpURLConnection.setReadTimeout(10000);
-            httpURLConnection.setConnectTimeout(15000);
+            httpURLConnection.setReadTimeout(READ_TIMEOUT);
+            httpURLConnection.setConnectTimeout(CONNECT_TIMEOUT);
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoInput(true);
             httpURLConnection.setDoOutput(true);
