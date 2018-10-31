@@ -99,10 +99,7 @@ public class RestAPITask extends AsyncTask<String, String, String> {
 
             Multipart multipart = new Multipart(requestURL, "UTF-8");
 
-//            multipart.addHeaderField("User-Agent", "CodeJava");
-//            multipart.addHeaderField("Test-Header", "Header-Value");
-
-            // Type 정해진 후 설정 필요
+            // KEY, VALUE setting
             multipart.addFormField("key", SHA);
             multipart.addFilePart("value", uploadFile);
 
