@@ -6,11 +6,16 @@ import android.os.AsyncTask;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.RandomAccessFile;
+import java.security.MessageDigest;
+
 import static blockChainTCL.babychain.Utils.Constant.BACKEND_URL;
 import static blockChainTCL.babychain.Utils.Constant.DELETE;
 import static blockChainTCL.babychain.Utils.Constant.MODIFY;
 import static blockChainTCL.babychain.Utils.Constant.READ;
 import static blockChainTCL.babychain.Utils.Constant.RESISTER;
+import static blockChainTCL.babychain.Utils.Constant.UPLOAD;
 
 public class RestAPITask extends AsyncTask<String, String, String> {
 
@@ -53,6 +58,10 @@ public class RestAPITask extends AsyncTask<String, String, String> {
                     result = restApi.GET(BACKEND_URL + DELETE + "/" + strings[1]);
 
                     break;
+                case UPLOAD :
+                    result =  upload(strings[1]);
+
+                    break;
                 default :
                     result = "ERROR : NOT EXIST METHOD!";
                     break;
@@ -77,5 +86,66 @@ public class RestAPITask extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
+    }
+
+    private String upload(String filename) {
+
+        String result;
+
+        try {
+            String SHA = extractFileHashSHA256(filename);
+            File uploadFile = new File(filename);
+            String requestURL = BACKEND_URL + UPLOAD;
+
+            Multipart multipart = new Multipart(requestURL, "UTF-8");
+
+//            multipart.addHeaderField("User-Agent", "CodeJava");
+//            multipart.addHeaderField("Test-Header", "Header-Value");
+
+            // Type 정해진 후 설정 필요
+            multipart.addFormField("key", SHA);
+            multipart.addFilePart("value", uploadFile);
+
+            result = multipart.finish();
+        } catch (Exception e) {
+            result = e.toString();
+        }
+
+        return result;
+    }
+
+    private static String extractFileHashSHA256(String filename) throws Exception {
+
+        String SHA;
+        int buff = 16384;
+
+        RandomAccessFile file = new RandomAccessFile(filename, "r");
+
+        MessageDigest hashSum = MessageDigest.getInstance("SHA-256");
+
+        byte[] buffer = new byte[buff];
+        byte[] partialHash = null;
+
+        long read = 0;
+
+        long offset = file.length();
+        int unitsize;
+        while(read < offset) {
+            unitsize = (int) ((offset -read) >= buff ? buff : (offset - read));
+            file.read(buffer, 0 , unitsize);
+
+            read += unitsize;
+        }
+        file.close();
+
+        partialHash = hashSum.digest();
+
+        StringBuffer sb = new StringBuffer();
+        for(int i=0; i<partialHash.length; i++) {
+            sb.append(Integer.toString((partialHash[i]&0xff) + 0x100, 16).substring(1));
+        }
+        SHA = sb.toString();
+
+        return SHA;
     }
 }
