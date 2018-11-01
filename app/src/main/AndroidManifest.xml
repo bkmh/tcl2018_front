@@ -38,6 +38,8 @@
 
         <activity android:name=".TempActivity">
         </activity>
+
+        <activity android:name=".MainActivityImage" />
     </application>
 
 </manifest>

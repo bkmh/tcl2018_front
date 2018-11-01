@@ -8,8 +8,8 @@ public class Constant {
     public static final String READ = "read";
     public static final String MODIFY = "modify";
     public static final String DELETE = "delete";
-    public static final String UPLOAD = "uploadtest";
+    public static final String UPLOAD = "uploadImage";
 
-    public static final int READ_TIMEOUT = 1000;
-    public static final int CONNECT_TIMEOUT = 5000;
+    public static final int READ_TIMEOUT = 10000;
+    public static final int CONNECT_TIMEOUT = 15000;
 }

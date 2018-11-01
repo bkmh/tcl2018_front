@@ -58,4 +58,8 @@ public class Cache {
         inputStream.close();
         return sb.toString();
     }
+
+    public String getPath(String fileName) {
+        return context.getCacheDir().getPath() + fileName;
+    }
 }

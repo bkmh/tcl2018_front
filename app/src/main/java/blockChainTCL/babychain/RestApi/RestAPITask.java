@@ -100,8 +100,8 @@ public class RestAPITask extends AsyncTask<String, String, String> {
             Multipart multipart = new Multipart(requestURL, "UTF-8");
 
             // KEY, VALUE setting
-            multipart.addFormField("key", SHA);
-            multipart.addFilePart("value", uploadFile);
+            multipart.addFormField("value", SHA);
+            multipart.addFilePart("upfile", uploadFile);
 
             result = multipart.finish();
         } catch (Exception e) {
