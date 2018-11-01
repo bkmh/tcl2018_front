@@ -118,7 +118,7 @@ public class TempActivity extends Activity {
             Cache cache = new Cache(this);
 
             RestAPITask restAPITask = new RestAPITask();
-            result = restAPITask.execute(Constant.UPLOAD, cache.getPath("/test.jpg")).get();
+            result = restAPITask.execute(Constant.UPLOAD, cache.getPath("test.jpg")).get();
         } catch (Exception e) {
             e.printStackTrace();
         }

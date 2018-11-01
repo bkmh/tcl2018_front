@@ -60,6 +60,6 @@ public class Cache {
     }
 
     public String getPath(String fileName) {
-        return context.getCacheDir().getPath() + fileName;
+        return context.getCacheDir().getPath() + "/" + fileName;
     }
 }
