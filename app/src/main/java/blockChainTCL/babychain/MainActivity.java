@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.io.IOException;
 
 import blockChainTCL.babychain.Utils.BackPressCloseHandler;
-import blockChainTCL.babychain.Utils.Cache;
+import blockChainTCL.babychain.Utils.CacheUtils;
 
 public class MainActivity extends Activity {
 
@@ -23,9 +23,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         try {
-            Cache cache = new Cache(this);
+            CacheUtils cache = new CacheUtils(this);
 
-            if(AGREED.equals(cache.readCache(AGREE_CACHE_NAME))) {
+            if(AGREED.equals(cache.readCacheString(AGREE_CACHE_NAME))) {
                 setContentView(R.layout.activity_main);
             } else {
                 setContentView(R.layout.activity_terms);
@@ -49,8 +49,8 @@ public class MainActivity extends Activity {
             // 약관 '동의 및 진행' 버튼 클릭 시
             case R.id.agreeButton:
                 try {
-                    Cache cache = new Cache(this);
-                    cache.writeCache(AGREED, AGREE_CACHE_NAME);
+                    CacheUtils cache = new CacheUtils(this);
+                    cache.writeCacheString(AGREE_CACHE_NAME, AGREED);
 
                     setContentView(R.layout.activity_main);
                 } catch (IOException e) {

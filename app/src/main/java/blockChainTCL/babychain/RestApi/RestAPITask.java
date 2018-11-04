@@ -7,15 +7,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.RandomAccessFile;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.security.MessageDigest;
 
 import static blockChainTCL.babychain.Utils.Constant.BACKEND_URL;
 import static blockChainTCL.babychain.Utils.Constant.DELETE;
 import static blockChainTCL.babychain.Utils.Constant.MODIFY;
 import static blockChainTCL.babychain.Utils.Constant.READ;
+import static blockChainTCL.babychain.Utils.Constant.READ_IMAGE;
 import static blockChainTCL.babychain.Utils.Constant.RESISTER;
-import static blockChainTCL.babychain.Utils.Constant.UPLOAD;
+import static blockChainTCL.babychain.Utils.Constant.UPLOAD_IMAGE;
 
 public class RestAPITask extends AsyncTask<String, String, String> {
 
@@ -58,8 +60,16 @@ public class RestAPITask extends AsyncTask<String, String, String> {
                     result = restApi.GET(BACKEND_URL + DELETE + "/" + strings[1]);
 
                     break;
-                case UPLOAD :
+                case UPLOAD_IMAGE :
                     result =  upload(strings[1]);
+
+                    break;
+                case READ_IMAGE :
+                    result = restApi.GET(BACKEND_URL + READ_IMAGE + "/" + strings[1]);
+
+                    jsonArray = new JSONArray(result);
+                    jsonObject = jsonArray.getJSONObject(0);
+                    result = jsonObject.getString("parsed");
 
                     break;
                 default :
@@ -95,7 +105,7 @@ public class RestAPITask extends AsyncTask<String, String, String> {
         try {
             String SHA = extractFileHashSHA256(filename);
             File uploadFile = new File(filename);
-            String requestURL = BACKEND_URL + UPLOAD;
+            String requestURL = BACKEND_URL + UPLOAD_IMAGE;
 
             Multipart multipart = new Multipart(requestURL, "UTF-8");
 
@@ -104,6 +114,8 @@ public class RestAPITask extends AsyncTask<String, String, String> {
             multipart.addFilePart("upfile", uploadFile);
 
             result = multipart.finish();
+            result = SHA; // 응답값 대신 SHA-256 변환값으로 출력
+
         } catch (Exception e) {
             result = e.toString();
         }
@@ -113,36 +125,25 @@ public class RestAPITask extends AsyncTask<String, String, String> {
 
     private static String extractFileHashSHA256(String filename) throws Exception {
 
-        String SHA;
-        int buff = 16384;
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        try{
+            FileInputStream fis = new FileInputStream(filename);
+            byte[] dataBytes = new byte[1024];
 
-        RandomAccessFile file = new RandomAccessFile(filename, "r");
-
-        MessageDigest hashSum = MessageDigest.getInstance("SHA-256");
-
-        byte[] buffer = new byte[buff];
-        byte[] partialHash = null;
-
-        long read = 0;
-
-        long offset = file.length();
-        int unitsize;
-        while(read < offset) {
-            unitsize = (int) ((offset -read) >= buff ? buff : (offset - read));
-            file.read(buffer, 0 , unitsize);
-
-            read += unitsize;
+            int nread = 0;
+            while ((nread = fis.read(dataBytes)) != -1) {
+                md.update(dataBytes, 0, nread);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        file.close();
-
-        partialHash = hashSum.digest();
+        byte[] mdbytes = md.digest();
 
         StringBuffer sb = new StringBuffer();
-        for(int i=0; i<partialHash.length; i++) {
-            sb.append(Integer.toString((partialHash[i]&0xff) + 0x100, 16).substring(1));
+        for (int i = 0; i < mdbytes.length; i++) {
+            sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
         }
-        SHA = sb.toString();
 
-        return SHA;
+        return sb.toString();
     }
 }

@@ -1,18 +1,22 @@
 package blockChainTCL.babychain.Utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Cache {
+public class CacheUtils {
 
     private Context context;
 
-    public Cache(Context co){
+    public CacheUtils(Context co){
         context = co;
     }
 
@@ -31,9 +35,9 @@ public class Cache {
         return context.getCacheDir();
     }
 
-    public void writeCache(String obj, String fileName) throws IOException {
+    public void writeCacheString(String filename, String obj) throws IOException {
         File cacheDir = getCacheDir(context);
-        File cacheFile = new File(cacheDir, fileName);
+        File cacheFile = new File(cacheDir, filename);
         if(!cacheFile.exists()) {
             cacheFile.createNewFile();
         }
@@ -43,9 +47,9 @@ public class Cache {
         fileWriter.close();
     }
 
-    public String readCache(String fileName) throws IOException {
+    public String readCacheString(String filename) throws IOException {
         File cacheDir = getCacheDir(context);
-        File cacheFile = new File(cacheDir, fileName);
+        File cacheFile = new File(cacheDir, filename);
         if(!cacheFile.exists()) {
             cacheFile.createNewFile();
         }
@@ -57,6 +61,24 @@ public class Cache {
         }
         inputStream.close();
         return sb.toString();
+    }
+
+    public void writeCacheImage(String filename, Bitmap image) throws IOException {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+
+        File cacheDir = getCacheDir(context);
+        File cacheFile = new File(cacheDir, filename);
+        if(!cacheFile.exists()) {
+            cacheFile.createNewFile();
+        }
+
+        FileOutputStream fo = new FileOutputStream(cacheFile);
+        fo.write(bytes.toByteArray());
+        MediaScannerConnection.scanFile(context,
+                new String[]{cacheFile.getPath()},
+                new String[]{"image/jpeg"}, null);
+        fo.close();
     }
 
     public String getPath(String fileName) {
