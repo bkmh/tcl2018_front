@@ -1,4 +1,4 @@
-package blockChainTCL.babychain;
+package blockChainTCL.babychain.Sample;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,99 +19,154 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
+import blockChainTCL.babychain.R;
 import blockChainTCL.babychain.RestApi.RestAPITask;
 import blockChainTCL.babychain.Utils.CacheUtils;
 import blockChainTCL.babychain.Utils.Constant;
-import blockChainTCL.babychain.Utils.FileUtils;
+import blockChainTCL.babychain.Utils.PathUtil;
 
-public class TempActivity extends Activity {
+public class CRUDTestActivity extends Activity {
 
     private Activity thisActivity = this;
     private final int GALLERY = 0, CAMERA = 1;
     private final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 0;
     private final int PERMISSIONS_REQUEST_CAMERA = 1;
 
-    private String SHA256 = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_temp);
+        setContentView(R.layout.activity_crud_test);
 
-
+        // Text 등록
         ((Button) findViewById(R.id.button_temp_register)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    RestAPITask restAPITask = new RestAPITask();
+                    String result = restAPITask.execute(Constant.RESISTER, "keyString", "valueString").get();
+
+                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Text 조회
+        ((Button) findViewById(R.id.button_temp_read)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    RestAPITask restAPITask = new RestAPITask();
+                    String result = restAPITask.execute(Constant.READ, "keyString").get();
+
+                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Text 수정
+        ((Button) findViewById(R.id.button_temp_modify)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    RestAPITask restAPITask = new RestAPITask();
+                    String result = restAPITask.execute(Constant.MODIFY, "keyString", "valueStringModified").get();
+
+                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Text 삭제
+        ((Button) findViewById(R.id.button_temp_delete)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    RestAPITask restAPITask = new RestAPITask();
+                    String result = restAPITask.execute(Constant.DELETE, "keyString").get();
+
+                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Image 등록
+        ((Button) findViewById(R.id.button_temp_upload_image)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 uploadImage();
             }
         });
 
-        // 조회버튼
-        ((Button) findViewById(R.id.button_temp_read)).setOnClickListener(new View.OnClickListener() {
+        // Image 조회
+        ((Button) findViewById(R.id.button_temp_read_image)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                readImage();
+                try {
+                    RestAPITask restAPITask = new RestAPITask();
+                    String result = restAPITask.execute(Constant.READ_IMAGE, "valueString").get();
+
+                    byte[] decodedString = Base64.decode(result, Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+                    ImageView imageview = (ImageView) findViewById(R.id.iv_temp);
+                    imageview.setImageBitmap(bitmap);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
-    }
 
-    // Text 등록
-    private void register() {
-        try {
-            RestAPITask restAPITask = new RestAPITask();
-            String result = restAPITask.execute(Constant.RESISTER, "keyTempActivity", "valueTempActivity").get();
+        // Image To Text 등록
+        ((Button) findViewById(R.id.button_temp_upload_itot)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Image To Text 등록", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+        // Image To Text 조회
+        ((Button) findViewById(R.id.button_temp_read_itot)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Image To Text 조회", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-    // Text 읽기
-    private void read() {
-        try {
-            RestAPITask restAPITask = new RestAPITask();
-            String result = restAPITask.execute(Constant.READ, "keyTempActivity").get();
+        // Image To Text 수정
+        ((Button) findViewById(R.id.button_temp_modify_itot)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Image To Text 수정", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Text 수정
-    private void modify() {
-        try {
-            RestAPITask restAPITask = new RestAPITask();
-            String result = restAPITask.execute(Constant.MODIFY, "keyTempActivity", "valueModified").get();
-
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Text 삭제
-    private void delete() {
-        try {
-            RestAPITask restAPITask = new RestAPITask();
-            String result = restAPITask.execute(Constant.DELETE, "keyTempActivity").get();
-
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Image To Text 삭제
+        ((Button) findViewById(R.id.button_temp_delete_itot)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Image To Text 삭제", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // Image 등록 START
@@ -198,7 +253,8 @@ public class TempActivity extends Activity {
         String filename = null;
         if(requestCode == GALLERY) {
             Uri contentURI = data.getData();
-            filename = FileUtils.getRealPathFromDocumentUri(this, contentURI);
+            filename = PathUtil.getRealPath(getApplicationContext(), contentURI);
+
 //            try {
 //                Bitmap image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
 //            } catch (IOException e) {
@@ -207,7 +263,8 @@ public class TempActivity extends Activity {
         } else if (requestCode == CAMERA) {
             try {
                 Bitmap image = (Bitmap) data.getExtras().get("data");
-                filename = Calendar.getInstance().getTimeInMillis() + ".jpg";
+//                filename = Calendar.getInstance().getTimeInMillis() + ".jpg";
+                filename = "temp.jpg";
 
                 cache.writeCacheImage(filename, image);
 
@@ -219,10 +276,9 @@ public class TempActivity extends Activity {
         if(!filename.isEmpty()) {
             try {
                 RestAPITask restAPITask = new RestAPITask();
-                String result = restAPITask.execute(Constant.UPLOAD_IMAGE, filename).get();
+                String result = restAPITask.execute(Constant.UPLOAD_IMAGE, filename, "valueString").get();
 
                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
-                SHA256 = result;
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -231,24 +287,4 @@ public class TempActivity extends Activity {
         }
     }
     // Image 등록 END
-
-    // Image 조회
-    private void readImage() {
-        if(!"".equals(SHA256)) {
-            try {
-                RestAPITask restAPITask = new RestAPITask();
-                String result = restAPITask.execute(Constant.READ_IMAGE, SHA256).get();
-
-                byte[] decodedString = Base64.decode(result, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-                ImageView imageview = (ImageView) findViewById(R.id.iv_temp);
-                imageview.setImageBitmap(bitmap);
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

@@ -1,4 +1,4 @@
-package blockChainTCL.babychain;
+package blockChainTCL.babychain.Sample;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,7 +22,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
-public class MainActivityImage extends Activity {
+import blockChainTCL.babychain.R;
+
+public class ImageSampleActivity extends Activity {
 
     private Button btn;
     private ImageView imageview;
@@ -35,7 +37,7 @@ public class MainActivityImage extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_image);
+        setContentView(R.layout.activity_image_sample);
 
         btn = (Button) findViewById(R.id.btn);
         imageview = (ImageView) findViewById(R.id.iv);
@@ -116,12 +118,12 @@ public class MainActivityImage extends Activity {
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
                     String path = saveImage(bitmap);
-                    Toast.makeText(MainActivityImage.this, "멍멍멍", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "멍멍멍", Toast.LENGTH_SHORT).show();
                     imageview.setImageBitmap(bitmap);
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(MainActivityImage.this, "Failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -129,7 +131,7 @@ public class MainActivityImage extends Activity {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             imageview.setImageBitmap(thumbnail);
             saveImage(thumbnail);
-            Toast.makeText(MainActivityImage.this, Environment.getExternalStorageDirectory().toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), Environment.getExternalStorageDirectory().toString(), Toast.LENGTH_SHORT).show();
         }
     }
 

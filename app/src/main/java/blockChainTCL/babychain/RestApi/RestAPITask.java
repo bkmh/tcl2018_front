@@ -13,11 +13,17 @@ import java.security.MessageDigest;
 
 import static blockChainTCL.babychain.Utils.Constant.BACKEND_URL;
 import static blockChainTCL.babychain.Utils.Constant.DELETE;
+import static blockChainTCL.babychain.Utils.Constant.DELETE_IMAGE_TO_TEXT;
 import static blockChainTCL.babychain.Utils.Constant.MODIFY;
+import static blockChainTCL.babychain.Utils.Constant.MODIFY_IMAGE_TO_TEXT;
 import static blockChainTCL.babychain.Utils.Constant.READ;
 import static blockChainTCL.babychain.Utils.Constant.READ_IMAGE;
+import static blockChainTCL.babychain.Utils.Constant.READ_IMAGE_TO_TEXT;
 import static blockChainTCL.babychain.Utils.Constant.RESISTER;
+import static blockChainTCL.babychain.Utils.Constant.TYPE_FILE;
+import static blockChainTCL.babychain.Utils.Constant.TYPE_STRING;
 import static blockChainTCL.babychain.Utils.Constant.UPLOAD_IMAGE;
+import static blockChainTCL.babychain.Utils.Constant.UPLOAD_IMAGE_TO_TEXT;
 
 public class RestAPITask extends AsyncTask<String, String, String> {
 
@@ -31,7 +37,7 @@ public class RestAPITask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... strings) {
 
-        String result;
+        String result = "";
         JSONArray jsonArray;
         JSONObject jsonObject;
 
@@ -61,7 +67,9 @@ public class RestAPITask extends AsyncTask<String, String, String> {
 
                     break;
                 case UPLOAD_IMAGE :
-                    result =  upload(strings[1]);
+                    result = uploadImage(BACKEND_URL + UPLOAD_IMAGE,
+                            "upfile", strings[1], TYPE_FILE,
+                            "value", strings[2], TYPE_STRING);
 
                     break;
                 case READ_IMAGE :
@@ -71,6 +79,14 @@ public class RestAPITask extends AsyncTask<String, String, String> {
                     jsonObject = jsonArray.getJSONObject(0);
                     result = jsonObject.getString("parsed");
 
+                    break;
+                case UPLOAD_IMAGE_TO_TEXT :
+                    break;
+                case READ_IMAGE_TO_TEXT :
+                    break;
+                case MODIFY_IMAGE_TO_TEXT :
+                    break;
+                case DELETE_IMAGE_TO_TEXT :
                     break;
                 default :
                     result = "ERROR : NOT EXIST METHOD!";
@@ -98,24 +114,24 @@ public class RestAPITask extends AsyncTask<String, String, String> {
         super.onPostExecute(result);
     }
 
-    private String upload(String filename) {
-
+    private String uploadImage(String requestURL, String... strings) { // KEY, VALUE, TYPE, ...
         String result;
 
         try {
-            String SHA = extractFileHashSHA256(filename);
-            File uploadFile = new File(filename);
-            String requestURL = BACKEND_URL + UPLOAD_IMAGE;
-
             Multipart multipart = new Multipart(requestURL, "UTF-8");
 
             // KEY, VALUE setting
-            multipart.addFormField("value", SHA);
-            multipart.addFilePart("upfile", uploadFile);
+            if(strings.length > 0) {
+                for (int i = 0; i < strings.length; i += 3) {
+                    if(TYPE_FILE.equals(strings[i + 2])) {
+                        multipart.addFilePart(strings[i], new File(strings[i + 1]));
+                    } else if(TYPE_STRING.equals(strings[i + 2])) {
+                        multipart.addFormField(strings[i], strings[i + 1]);
+                    }
+                }
+            }
 
             result = multipart.finish();
-            result = SHA; // 응답값 대신 SHA-256 변환값으로 출력
-
         } catch (Exception e) {
             result = e.toString();
         }
@@ -124,7 +140,6 @@ public class RestAPITask extends AsyncTask<String, String, String> {
     }
 
     private static String extractFileHashSHA256(String filename) throws Exception {
-
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         try{
             FileInputStream fis = new FileInputStream(filename);

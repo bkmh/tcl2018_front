@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import blockChainTCL.babychain.Sample.CRUDTestActivity;
 import blockChainTCL.babychain.Utils.BackPressCloseHandler;
 import blockChainTCL.babychain.Utils.CacheUtils;
 
@@ -73,9 +74,9 @@ public class MainActivity extends Activity {
                 intent = new Intent(this, ModActivity.class);
                 break;
 
-            // 메인메뉴 '임시' 버튼 클릭 시
-            case R.id.tempButton:
-                intent = new Intent(this, TempActivity.class);
+            // 기타
+            case R.id.crudTestButton:
+                intent = new Intent(this, CRUDTestActivity.class);
                 break;
         }
         if(intent != null) {

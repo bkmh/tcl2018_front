@@ -34,10 +34,11 @@
         <activity android:name=".ModActivity">
         </activity>
 
-        <activity android:name=".TempActivity">
+        <activity android:name=".Sample.CRUDTestActivity">
         </activity>
 
-        <activity android:name=".MainActivityImage" />
+        <activity android:name=".Sample.ImageSampleActivity">
+        </activity>
     </application>
 
 </manifest>

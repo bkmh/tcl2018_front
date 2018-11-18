@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Random;
 
 public class Multipart {
     private final String boundary;
@@ -23,12 +24,10 @@ public class Multipart {
     public Multipart(String requestURL, String charset) throws IOException {
         this.charset = charset;
 
-        // creates a unique boundary based on time stamp
-        boundary = "***" + System.currentTimeMillis() + "***";
+        boundary = createBoundary();
 
         URL url = new URL(requestURL);
         httpURLConnection = (HttpURLConnection) url.openConnection();
-        httpURLConnection.setRequestMethod("POST");
         httpURLConnection.setDoInput(true);
         httpURLConnection.setDoOutput(true);
         httpURLConnection.setUseCaches(false);
@@ -36,6 +35,15 @@ public class Multipart {
         httpURLConnection.setRequestProperty("User-Agent", "BabyChain Andorid Client");
         outputStream = httpURLConnection.getOutputStream();
         writer = new PrintWriter(new OutputStreamWriter(outputStream, charset),true);
+    }
+
+    public static String createBoundary() {
+        Random r = new Random();
+        String allowed = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        StringBuilder b = new StringBuilder();
+        for (int i=0; i < 32; i++)
+            b.append(allowed.charAt(r.nextInt(allowed.length())));
+        return b.toString();
     }
 
     public void addFormField(String name, String value) {
@@ -77,8 +85,8 @@ public class Multipart {
     public String finish() throws IOException {
         String result;
 
-        writer.append(LINE_FEED).flush();
         writer.append("--" + boundary + "--").append(LINE_FEED);
+        writer.flush();
         writer.close();
 
         // checks server's status code first
