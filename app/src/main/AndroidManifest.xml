@@ -34,7 +34,33 @@
         <activity android:name=".ModActivity">
         </activity>
 
+        <activity android:name=".NewMainActivity">
+        </activity>
+
+        <activity android:name=".RegMainActivity">
+        </activity>
+
+        <activity android:name=".CopDBInqActivity">
+        </activity>
+
+        <activity android:name=".MyPageMainActivity">
+        </activity>
+
+        <activity android:name=".EditInfoPreRegActivity">
+        </activity>
+
+        <activity android:name=".EditMissingRegActivity">
+        </activity>
+
+        <activity android:name=".EditCareRegActivity">
+        </activity>
+
         <activity android:name=".Sample.CRUDTestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".Sample.ImageSampleActivity">

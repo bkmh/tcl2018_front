@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
 
+import blockChainTCL.babychain.NewMainActivity;
 import blockChainTCL.babychain.R;
 import blockChainTCL.babychain.RestApi.RestAPITask;
 import blockChainTCL.babychain.Utils.Constant;
@@ -248,5 +249,11 @@ public class CRUDTestActivity extends Activity {
                 }
             }
         }
+    }
+
+    public void onBtnClick3(View v) {
+        //이미선 수정
+        Intent intent = new Intent(getApplicationContext(), NewMainActivity.class);
+        startActivity(intent);
     }
 }
