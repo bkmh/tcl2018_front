@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="blockChainTCL.babychain.NewMainActivity">
+
+    <Button
+        android:id="@+id/inqButton2"
+        android:layout_width="122dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginLeft="148dp"
+        android:layout_marginTop="24dp"
+        android:onClick="mOnClick"
+        android:text="보호아동 등 조회"
+        app:layout_constraintStart_toStartOf="@+id/regButton"
+        app:layout_constraintTop_toBottomOf="@+id/regButton" />
+
+    <Button
+        android:id="@+id/modButton2"
+        android:layout_width="119dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginLeft="148dp"
+        android:layout_marginTop="24dp"
+        android:onClick="mOnClick"
+        android:text="등록"
+        app:layout_constraintStart_toStartOf="@+id/inqButton"
+        app:layout_constraintTop_toBottomOf="@+id/inqButton2" />
+
+    <Button
+        android:id="@+id/regButton2"
+        android:layout_width="125dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
+        android:onClick="mOnClick"
+        android:text="긴급실종신고"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/regButton"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.151" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Missing"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.031" />
+
+    <Button
+        android:id="@+id/regButton"
+        android:layout_width="123dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="8dp"
+        android:onClick="mOnClick"
+        android:text="정보사전등록"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.199"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <Button
+        android:id="@+id/inqButton"
+        android:layout_width="124dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="20dp"
+        android:onClick="mOnClick"
+        android:text="실종아동 등 조회"
+        app:layout_constraintStart_toStartOf="@+id/regButton"
+        app:layout_constraintTop_toBottomOf="@+id/regButton" />
+
+    <Button
+        android:id="@+id/modButton"
+        android:layout_width="124dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="20dp"
+        android:onClick="mOnClick"
+        android:text="경찰청DB조회"
+        app:layout_constraintStart_toStartOf="@+id/inqButton"
+        app:layout_constraintTop_toBottomOf="@+id/inqButton" />
+
+    <Button
+        android:id="@+id/modButton3"
+        android:layout_width="256dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="116dp"
+        android:onClick="mOnClick"
+        android:text="MY PAGE"
+        app:layout_constraintStart_toStartOf="@+id/inqButton"
+        app:layout_constraintTop_toBottomOf="@+id/inqButton" />
+
+</android.support.constraint.ConstraintLayout>
