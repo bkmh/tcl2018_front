@@ -81,12 +81,30 @@ public class RestAPITask extends AsyncTask<String, String, String> {
 
                     break;
                 case UPLOAD_IMAGE_TO_TEXT :
+                    result = uploadImage(BACKEND_URL + UPLOAD_IMAGE_TO_TEXT,
+                            "upfile", strings[1], TYPE_FILE,
+                            "value", strings[2], TYPE_STRING);
+
                     break;
                 case READ_IMAGE_TO_TEXT :
+                    result = uploadImage(BACKEND_URL + READ_IMAGE_TO_TEXT,
+                            "upfile", strings[1], TYPE_FILE);
+
+                    jsonArray = new JSONArray(result);
+                    jsonObject = jsonArray.getJSONObject(0);
+                    result = jsonObject.getString("parsed");
+
                     break;
                 case MODIFY_IMAGE_TO_TEXT :
+                    result = uploadImage(BACKEND_URL + MODIFY_IMAGE_TO_TEXT,
+                            "upfile", strings[1], TYPE_FILE,
+                            "value", strings[2], TYPE_STRING);
+
                     break;
                 case DELETE_IMAGE_TO_TEXT :
+                    result = uploadImage(BACKEND_URL + DELETE_IMAGE_TO_TEXT,
+                            "upfile", strings[1], TYPE_FILE);
+
                     break;
                 default :
                     result = "ERROR : NOT EXIST METHOD!";
