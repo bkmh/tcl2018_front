@@ -84,6 +84,7 @@ public class ImageLoadActivity extends Activity {
             } else {
                 // Permission Denied
                 Toast.makeText(this, "Permission denied for read external storage", Toast.LENGTH_SHORT).show();
+                finish();
             }
             return;
         }
@@ -94,6 +95,7 @@ public class ImageLoadActivity extends Activity {
             } else {
                 // Permission Denied
                 Toast.makeText(this, "Permission denied for camera", Toast.LENGTH_SHORT).show();
+                finish();
             }
             return;
         }

@@ -37,7 +37,7 @@ public class RestAPITask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... strings) {
 
-        String result = "";
+        String result;
         JSONArray jsonArray;
         JSONObject jsonObject;
 
@@ -163,18 +163,18 @@ public class RestAPITask extends AsyncTask<String, String, String> {
             FileInputStream fis = new FileInputStream(filename);
             byte[] dataBytes = new byte[1024];
 
-            int nread = 0;
-            while ((nread = fis.read(dataBytes)) != -1) {
-                md.update(dataBytes, 0, nread);
+            int len;
+            while ((len = fis.read(dataBytes)) != -1) {
+                md.update(dataBytes, 0, len);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        byte[] mdbytes = md.digest();
+        byte[] bytes = md.digest();
 
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < mdbytes.length; i++) {
-            sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+        StringBuilder sb = new StringBuilder();
+        for (byte aByte : bytes) {
+            sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
         }
 
         return sb.toString();

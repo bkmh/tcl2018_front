@@ -10,6 +10,8 @@ import android.widget.TextView;
 import java.io.IOException;
 
 import blockChainTCL.babychain.Sample.CRUDTestActivity;
+import blockChainTCL.babychain.Sample.GPSTestActivity;
+import blockChainTCL.babychain.Sample.MapTestActivity;
 import blockChainTCL.babychain.Utils.BackPressCloseHandler;
 import blockChainTCL.babychain.Utils.CacheUtils;
 
@@ -75,8 +77,20 @@ public class MainActivity extends Activity {
                 break;
 
             // 기타
+            case R.id.yodaTestButton:
+                intent = new Intent(this, NewMainActivity.class);
+                break;
+
             case R.id.crudTestButton:
                 intent = new Intent(this, CRUDTestActivity.class);
+                break;
+
+            case R.id.gpsTestButton:
+                intent = new Intent(this, GPSTestActivity.class);
+                break;
+
+            case R.id.mapTestButton:
+                intent = new Intent(this, MapTestActivity.class);
                 break;
         }
         if(intent != null) {

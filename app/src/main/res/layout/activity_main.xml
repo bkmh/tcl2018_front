@@ -18,7 +18,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.10" />
 
     <Button
         android:id="@+id/regButton"
@@ -54,6 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/inqButton" />
 
     <LinearLayout
+        android:id="@+id/yodaLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
@@ -64,11 +65,43 @@
         app:layout_constraintTop_toBottomOf="@+id/modButton">
 
         <Button
+            android:id="@+id/yodaTestButton"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:onClick="mOnClick"
+            android:text="미선 Test" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="@+id/yodaLinearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/yodaLinearLayout">
+
+        <Button
             android:id="@+id/crudTestButton"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:onClick="mOnClick"
             android:text="CRUD Test" />
+
+        <Button
+            android:id="@+id/gpsTestButton"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:onClick="mOnClick"
+            android:text="GPS Test" />
+
+        <Button
+            android:id="@+id/mapTestButton"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:onClick="mOnClick"
+            android:text="MAP Test" />
     </LinearLayout>
 
 

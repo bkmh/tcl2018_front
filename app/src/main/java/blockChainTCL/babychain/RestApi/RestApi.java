@@ -78,13 +78,13 @@ public class RestApi {
     }
 
     public static String encodeString(Properties params) {
-        StringBuffer sb = new StringBuffer(256);
+        StringBuilder sb = new StringBuilder(256);
         Enumeration names = params.propertyNames();
 
         while (names.hasMoreElements()) {
             String name = (String) names.nextElement();
             String value = params.getProperty(name);
-            sb.append(URLEncoder.encode(name) + "=" + URLEncoder.encode(value) );
+            sb.append(URLEncoder.encode(name)).append("=").append(URLEncoder.encode(value));
 
             if (names.hasMoreElements()) sb.append("&");
         }
@@ -166,11 +166,10 @@ public class RestApi {
 
             }
             return json;
-        } catch (JSONException e) {
-            json = null;
+        } catch (JSONException ignored) {
         }
 
-        return json;
+        return null;
     }
 
 }

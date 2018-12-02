@@ -7,13 +7,11 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
 
-import blockChainTCL.babychain.NewMainActivity;
 import blockChainTCL.babychain.R;
 import blockChainTCL.babychain.RestApi.RestAPITask;
 import blockChainTCL.babychain.Utils.Constant;
@@ -34,7 +32,7 @@ public class CRUDTestActivity extends Activity {
         setContentView(R.layout.activity_crud_test);
 
         // Text 등록
-        ((Button) findViewById(R.id.button_temp_register)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_temp_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -51,7 +49,7 @@ public class CRUDTestActivity extends Activity {
         });
 
         // Text 조회
-        ((Button) findViewById(R.id.button_temp_read)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_temp_read).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -68,7 +66,7 @@ public class CRUDTestActivity extends Activity {
         });
 
         // Text 수정
-        ((Button) findViewById(R.id.button_temp_modify)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_temp_modify).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -85,7 +83,7 @@ public class CRUDTestActivity extends Activity {
         });
 
         // Text 삭제
-        ((Button) findViewById(R.id.button_temp_delete)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_temp_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -102,7 +100,7 @@ public class CRUDTestActivity extends Activity {
         });
 
         // Image 등록
-        ((Button) findViewById(R.id.button_temp_upload_image)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_temp_upload_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(thisActivity, ImageLoadActivity.class);
@@ -111,7 +109,7 @@ public class CRUDTestActivity extends Activity {
         });
 
         // Image 조회
-        ((Button) findViewById(R.id.button_temp_read_image)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_temp_read_image).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -121,7 +119,7 @@ public class CRUDTestActivity extends Activity {
                     byte[] decodedString = Base64.decode(result, Base64.DEFAULT);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-                    ImageView imageview = (ImageView) findViewById(R.id.iv_temp);
+                    ImageView imageview = findViewById(R.id.iv_temp);
                     imageview.setImageBitmap(bitmap);
                 } catch (ExecutionException e) {
                     e.printStackTrace();
@@ -132,7 +130,7 @@ public class CRUDTestActivity extends Activity {
         });
 
         // Image To Text 등록
-        ((Button) findViewById(R.id.button_temp_upload_itot)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_temp_upload_itot).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(thisActivity, ImageLoadActivity.class);
@@ -141,7 +139,7 @@ public class CRUDTestActivity extends Activity {
         });
 
         // Image To Text 조회
-        ((Button) findViewById(R.id.button_temp_read_itot)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_temp_read_itot).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(thisActivity, ImageLoadActivity.class);
@@ -150,7 +148,7 @@ public class CRUDTestActivity extends Activity {
         });
 
         // Image To Text 수정
-        ((Button) findViewById(R.id.button_temp_modify_itot)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_temp_modify_itot).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(thisActivity, ImageLoadActivity.class);
@@ -159,7 +157,7 @@ public class CRUDTestActivity extends Activity {
         });
 
         // Image To Text 삭제
-        ((Button) findViewById(R.id.button_temp_delete_itot)).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_temp_delete_itot).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(thisActivity, ImageLoadActivity.class);
@@ -173,9 +171,7 @@ public class CRUDTestActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == this.RESULT_CANCELED) {
-            return;
-        } else if(resultCode == this.RESULT_OK) {
+        if(resultCode == RESULT_OK) {
             if(data == null) {
                 return;
             }
@@ -249,11 +245,5 @@ public class CRUDTestActivity extends Activity {
                 }
             }
         }
-    }
-
-    public void onBtnClick3(View v) {
-        //이미선 수정
-        Intent intent = new Intent(getApplicationContext(), NewMainActivity.class);
-        startActivity(intent);
     }
 }
