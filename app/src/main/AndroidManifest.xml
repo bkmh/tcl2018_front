@@ -39,6 +39,9 @@
 
         <activity android:name=".Sample.ImageSampleActivity">
         </activity>
+
+        <activity android:name=".Utils.ImageLoadActivity" android:theme="@style/imageLoadDialogTheme">
+        </activity>
     </application>
 
 </manifest>
