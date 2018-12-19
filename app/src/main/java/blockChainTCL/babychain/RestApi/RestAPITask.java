@@ -17,11 +17,17 @@ import static blockChainTCL.babychain.Utils.Constant.DELETE_IMAGE_TO_TEXT;
 import static blockChainTCL.babychain.Utils.Constant.MODIFY;
 import static blockChainTCL.babychain.Utils.Constant.MODIFY_IMAGE_TO_TEXT;
 import static blockChainTCL.babychain.Utils.Constant.READ;
+import static blockChainTCL.babychain.Utils.Constant.READ_FOR_MISSING;
+import static blockChainTCL.babychain.Utils.Constant.READ_FOR_PROTECTED;
+import static blockChainTCL.babychain.Utils.Constant.READ_FOR_REGISTERED;
 import static blockChainTCL.babychain.Utils.Constant.READ_IMAGE;
 import static blockChainTCL.babychain.Utils.Constant.READ_IMAGE_TO_TEXT;
 import static blockChainTCL.babychain.Utils.Constant.RESISTER;
 import static blockChainTCL.babychain.Utils.Constant.TYPE_FILE;
 import static blockChainTCL.babychain.Utils.Constant.TYPE_STRING;
+import static blockChainTCL.babychain.Utils.Constant.UPLOAD_FOR_MISSING;
+import static blockChainTCL.babychain.Utils.Constant.UPLOAD_FOR_PROTECTED;
+import static blockChainTCL.babychain.Utils.Constant.UPLOAD_FOR_REGISTERED;
 import static blockChainTCL.babychain.Utils.Constant.UPLOAD_IMAGE;
 import static blockChainTCL.babychain.Utils.Constant.UPLOAD_IMAGE_TO_TEXT;
 
@@ -105,6 +111,40 @@ public class RestAPITask extends AsyncTask<String, String, String> {
                     result = uploadImage(BACKEND_URL + DELETE_IMAGE_TO_TEXT,
                             "upfile", strings[1], TYPE_FILE);
 
+                    break;
+                // 실제 사용부분
+                case UPLOAD_FOR_REGISTERED :
+                    result = uploadImage(BACKEND_URL + UPLOAD_FOR_REGISTERED,
+                        "upfile", strings[1], TYPE_FILE,
+                        "strcontectnumber", strings[2], TYPE_STRING,
+                        "strdetailinfo", strings[3], TYPE_STRING);
+
+                    break;
+                case READ_FOR_REGISTERED :
+                    result = uploadImage(BACKEND_URL + READ_FOR_REGISTERED,
+                            "upfile", strings[1], TYPE_FILE);
+                    break;
+                case UPLOAD_FOR_PROTECTED :
+                    result = uploadImage(BACKEND_URL + UPLOAD_FOR_PROTECTED,
+                            "upfile", strings[1], TYPE_FILE,
+                            "strcontectnumber", strings[2], TYPE_STRING,
+                            "strdetailinfo", strings[3], TYPE_STRING);
+
+                    break;
+                case READ_FOR_PROTECTED :
+                    result = uploadImage(BACKEND_URL + READ_FOR_PROTECTED,
+                            "upfile", strings[1], TYPE_FILE);
+                    break;
+                case UPLOAD_FOR_MISSING :
+                    result = uploadImage(BACKEND_URL + UPLOAD_FOR_MISSING,
+                            "upfile", strings[1], TYPE_FILE,
+                            "strcontectnumber", strings[2], TYPE_STRING,
+                            "strdetailinfo", strings[3], TYPE_STRING);
+
+                    break;
+                case READ_FOR_MISSING :
+                    result = uploadImage(BACKEND_URL + READ_FOR_MISSING,
+                            "upfile", strings[1], TYPE_FILE);
                     break;
                 default :
                     result = "ERROR : NOT EXIST METHOD!";
