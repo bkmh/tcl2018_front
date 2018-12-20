@@ -208,7 +208,7 @@ public class CRUDTestActivity extends Activity {
                 if(!filename.isEmpty()) {
                     try {
                         RestAPITask restAPITask = new RestAPITask();
-                        String result = restAPITask.execute(Constant.UPLOAD_IMAGE_TO_TEXT, filename).get();
+                        String result = restAPITask.execute(Constant.READ_IMAGE_TO_TEXT, filename).get();
 
                         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
                     } catch (ExecutionException e) {
@@ -221,7 +221,7 @@ public class CRUDTestActivity extends Activity {
                 if(!filename.isEmpty()) {
                     try {
                         RestAPITask restAPITask = new RestAPITask();
-                        String result = restAPITask.execute(Constant.UPLOAD_IMAGE_TO_TEXT, filename, "valueStringModified").get();
+                        String result = restAPITask.execute(Constant.MODIFY_IMAGE_TO_TEXT, filename, "valueStringModified").get();
 
                         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
                     } catch (ExecutionException e) {
@@ -234,7 +234,7 @@ public class CRUDTestActivity extends Activity {
                 if(!filename.isEmpty()) {
                     try {
                         RestAPITask restAPITask = new RestAPITask();
-                        String result = restAPITask.execute(Constant.UPLOAD_IMAGE_TO_TEXT, filename).get();
+                        String result = restAPITask.execute(Constant.DELETE_IMAGE_TO_TEXT, filename).get();
 
                         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
                     } catch (ExecutionException e) {
