@@ -47,6 +47,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".RegInfoPreActivity">
+        </activity>
+
         <activity android:name=".RegMainActivity">
         </activity>
 

@@ -33,7 +33,8 @@ public class NewMainActivity extends Activity {
                 break;
 
             case R.id.regButton:        //정보사전등록
-                setContentView(R.layout.reg_info_pre);
+                intent = new Intent(this, RegInfoPreActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.regButton2:       //긴급실종신고
