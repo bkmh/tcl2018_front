@@ -3,9 +3,11 @@ package blockChainTCL.babychain;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,13 +57,23 @@ public class EditInfoPreRegActivity extends Activity {
                 RestAPITask restAPITask = new RestAPITask();
                 String result = restAPITask.execute(Constant.READ_FOR_REGISTERED, filename).get();
 
-                JSONObject jsonObject = new JSONObject(result);
+                //jsonArray = new JSONArray(result);
+                //jsonObject = jsonArray.getJSONObject(0);
+                //result = jsonObject.getString("parsed");
+
+                JSONArray jsonArray = new JSONArray(result);
+
+                JSONObject jsonObject = jsonArray.getJSONObject(0).getJSONObject("parsed");
+
+                Log.d("BKMH", "onActivityResult: " + jsonObject.getString("contactNum"));
+
 
                 EditText strcontectnumberEdit = (EditText)findViewById(R.id.editText5);
                 strcontectnumberEdit.setText(jsonObject.getString("contactNum"));
 
                 EditText strdetailinfoEdit = (EditText)findViewById(R.id.editText7);
                 strdetailinfoEdit.setText(jsonObject.getString("detailContents"));
+
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
