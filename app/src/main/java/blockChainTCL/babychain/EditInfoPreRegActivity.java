@@ -55,7 +55,8 @@ public class EditInfoPreRegActivity extends Activity {
 
             try {
                 RestAPITask restAPITask = new RestAPITask();
-                String result = restAPITask.execute(Constant.READ_FOR_REGISTERED, filename).get();
+//                String result = restAPITask.execute(Constant.READ_FOR_REGISTERED, filename).get();
+                String result = restAPITask.execute(Constant.READ_IMAGE_TO_TEXT, filename).get();
 
                 //jsonArray = new JSONArray(result);
                 //jsonObject = jsonArray.getJSONObject(0);
